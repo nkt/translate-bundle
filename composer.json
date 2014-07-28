@@ -1,0 +1,25 @@
+{
+    "name": "nkt/translate-bundle",
+    "type": "symfony-bundle",
+    "keywords": [
+        "translation",
+        "translate",
+        "entity"
+    ],
+    "authors": [
+        {
+            "name": "Nikita Gusakov",
+            "email": "dev@nkt.me"
+        }
+    ],
+    "require": {
+        "php": "~5.4",
+        "symfony/symfony": "~2.3",
+        "doctrine/orm": "~2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nkt\\TranslateBundle\\": "src"
+        }
+    }
+}
