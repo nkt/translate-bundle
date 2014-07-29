@@ -1,0 +1,24 @@
+parameters:
+    nkt.translate.event_subscriber.locale.class: Nkt\TranslateBundle\EventSubscriber\LocaleEventSubscriber
+    nkt.translate.event_subscriber.schema.class: Nkt\TranslateBundle\EventSubscriber\SchemaEventSubscriber
+    nkt.translate.behavior.translatable.trait: Nkt\TranslateBundle\Behavior\Translatable
+    nkt.translate.behavior.translation.trait: Nkt\TranslateBundle\Behavior\Translation
+    nkt.translate.translatable_fetch_mode: lazy
+    nkt.translate.translation_fetch_mode: lazy
+
+services:
+    nkt.translate.event_subscriber.locale:
+        class: %nkt.translate.translatable_subscriber.class%
+        arguments: [@translator]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    nkt.translate.event_subscriber.schema:
+        class: %nkt.translate.event_subscriber.schema.class%
+        arguments:
+            - %nkt.translate.behavior.translatable.trait%
+            - %nkt.translate.behavior.translation.trait%
+            - %nkt.translate.translatable_fetch_mode%
+            - %nkt.translate.translation_fetch_mode%
+        tags:
+            - { name: doctrine.event_subscriber }
