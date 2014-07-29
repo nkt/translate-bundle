@@ -20,7 +20,7 @@ class TranslatableTest extends \PHPUnit_Framework_TestCase
     public function testGetTranslation()
     {
         $post = new Post();
-        $translation = $post->translate($post->getDefaultLocale());
+        $translation = $post->translate($post->getCurrentLocale());
 
         $this->assertSame($translation, $post->getTranslation('ru'));
 

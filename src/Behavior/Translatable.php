@@ -12,7 +12,7 @@ trait Translatable
     /**
      * @var string
      */
-    protected $defaultLocale = 'en';
+    protected $currentLocale = 'en';
     /**
      * @var Translation[]|ArrayCollection
      */
@@ -62,7 +62,7 @@ trait Translatable
     public function getTranslation($locale)
     {
         $translation = $this->translations->get($locale);
-        if ($translation === null && $locale !== $defaultLocale = $this->getDefaultLocale()) {
+        if ($translation === null && $locale !== $defaultLocale = $this->getCurrentLocale()) {
             $translation = $this->translations->get($defaultLocale);
         }
 
@@ -119,19 +119,19 @@ trait Translatable
     /**
      * @return string
      */
-    public function getDefaultLocale()
+    public function getCurrentLocale()
     {
-        return $this->defaultLocale;
+        return $this->currentLocale;
     }
 
     /**
-     * @param string $defaultLocale
+     * @param string $currentLocale
      *
      * @return static
      */
-    public function setDefaultLocale($defaultLocale)
+    public function setCurrentLocale($currentLocale)
     {
-        $this->defaultLocale = $defaultLocale;
+        $this->currentLocale = $currentLocale;
 
         return $this;
     }
