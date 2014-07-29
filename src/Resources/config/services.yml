@@ -8,7 +8,7 @@ parameters:
 
 services:
     nkt.translate.event_subscriber.locale:
-        class: %nkt.translate.translatable_subscriber.class%
+        class: %nkt.translate.event_subscriber.locale.class%
         arguments: [@translator]
         tags:
             - { name: doctrine.event_subscriber }
