@@ -1,11 +1,13 @@
 {
     "name": "nkt/translate-bundle",
     "type": "symfony-bundle",
+    "description": "Bundle provides translation mechanism for Doctrine entities",
     "keywords": [
         "translation",
         "translate",
         "entity"
     ],
+    "license": "MIT",
     "authors": [
         {
             "name": "Nikita Gusakov",
@@ -20,6 +22,11 @@
     "autoload": {
         "psr-4": {
             "Nkt\\TranslateBundle\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
         }
     }
 }
