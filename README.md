@@ -9,11 +9,13 @@ Installation
 Add to your `composer.json`:
 
 ```json
-"require": {
-    "nkt/translate-bundle": "~0.1"
-},
-"minimum-stability": "dev",
-"prefer-stable": true
+{
+    "require": {
+        "nkt/translate-bundle": "~0.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
 ```
 
 Enable the bundle in the kernel:
