@@ -23,20 +23,12 @@ trait Translatable
      *
      * @return Translation
      */
-    public function translate($locale)
+    public function translate($locale = null)
     {
-        return $this->doTranslate($locale);
-    }
-
-    /**
-     * @param string $locale
-     *
-     * @return Translation
-     */
-    protected function doTranslate($locale)
-    {
-        $translations = $this->getTranslations();
-        $translation = $translations->get($locale);
+        if ($locale === null) {
+            $locale = $this->getCurrentLocale();
+        }
+        $translation = $this->getTranslations()->get($locale);
         if ($translation === null) {
             $translation = static::createNewTranslation();
             $translation->setLocale($locale);
