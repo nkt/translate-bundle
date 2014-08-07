@@ -47,6 +47,14 @@ trait Translatable
     }
 
     /**
+     * @return array
+     */
+    public function getAvailableLocales()
+    {
+        return $this->getTranslations()->getKeys();
+    }
+
+    /**
      * @param string $locale
      *
      * @return Translation
