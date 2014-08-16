@@ -44,6 +44,9 @@ class SchemaEventSubscriber implements EventSubscriber
     {
         $metadata = $args->getClassMetadata();
         $reflection = $metadata->getReflectionClass();
+        if ($reflection === null) {
+            return; // fix for crud generation wtf
+        }
         if ($this->hasTrait($reflection, $this->translatableTrait)) {
             $this->updateTranslatableMetadata($metadata);
         } elseif ($this->hasTrait($reflection, $this->translationTrait)) {

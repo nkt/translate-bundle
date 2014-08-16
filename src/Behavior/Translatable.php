@@ -12,11 +12,20 @@ trait Translatable
     /**
      * @var string
      */
+    protected $defaultLocale = 'en';
+    /**
+     * @var string
+     */
     protected $currentLocale = 'en';
     /**
      * @var Translation[]|ArrayCollection
      */
     protected $translations;
+
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection();
+    }
 
     /**
      * @param string $locale
@@ -28,12 +37,23 @@ trait Translatable
         if ($locale === null) {
             $locale = $this->getCurrentLocale();
         }
-        $translation = $this->getTranslations()->get($locale);
-        if ($translation === null) {
-            $translation = static::createNewTranslation();
-            $translation->setLocale($locale);
-            $this->addTranslation($translation);
+        $translations = $this->getTranslations();
+        if (!$translations->containsKey($locale)) {
+            $locale = $this->getDefaultLocale();
         }
+
+        return $translations->get($locale);
+    }
+
+    public function updateTranslation($locale)
+    {
+        $translations = $this->getTranslations();
+        if ($translations->containsKey($locale)) {
+            return $translations->get($locale);
+        }
+        $translation = static::createNewTranslation();
+        $translation->setLocale($locale);
+        $this->addTranslation($translation);
 
         return $translation;
     }
@@ -52,21 +72,6 @@ trait Translatable
     public function getAvailableLocales()
     {
         return $this->getTranslations()->getKeys();
-    }
-
-    /**
-     * @param string $locale
-     *
-     * @return Translation
-     */
-    public function getTranslation($locale)
-    {
-        $translation = $this->translations->get($locale);
-        if ($translation === null && $locale !== $defaultLocale = $this->getCurrentLocale()) {
-            $translation = $this->translations->get($defaultLocale);
-        }
-
-        return $translation;
     }
 
     /**
@@ -134,5 +139,25 @@ trait Translatable
         $this->currentLocale = $currentLocale;
 
         return $this;
+    }
+
+    /**
+     * @param string $defaultLocale
+     *
+     * @return static
+     */
+    public function setDefaultLocale($defaultLocale)
+    {
+        $this->defaultLocale = $defaultLocale;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultLocale()
+    {
+        return $this->defaultLocale;
     }
 }

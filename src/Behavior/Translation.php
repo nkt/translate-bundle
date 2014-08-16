@@ -25,6 +25,16 @@ trait Translation
     protected $translatable;
 
     /**
+     * @param string $locale
+     */
+    public function __construct($locale = null)
+    {
+        if ($locale !== null) {
+            $this->setLocale($locale);
+        }
+    }
+
+    /**
      * @return int
      */
     public function getId()
