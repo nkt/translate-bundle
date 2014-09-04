@@ -43,8 +43,7 @@ class SchemaEventSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $args)
     {
         $metadata = $args->getClassMetadata();
-        $reflection = $metadata->getReflectionClass();
-        if ($reflection === null) {
+        if (null === $reflection = $metadata->getReflectionClass()) {
             return; // fix for crud generation wtf
         }
         if ($this->hasTrait($reflection, $this->translatableTrait)) {
